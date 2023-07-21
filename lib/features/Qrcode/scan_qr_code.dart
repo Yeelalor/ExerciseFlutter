@@ -95,55 +95,55 @@ class _ScanQRState extends State<ScanQR> {
   }
 
   // ignore: unused_element
-  void _getPhotoByGallery() {
-    Stream.fromFuture(picker.pickImage(source: ImageSource.gallery))
-        .flatMap((file) {
-      setState(() {
-        _qrcodeFile = file!.path;
-      });
-      return Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file!.path));
-    }).listen((data) {
-      var qrTexts = data;
-      var newText = qrTexts.split('-');
-      var Lenght = qrTexts.substring(0, 22);
-      if (data != '') {
-        if (Lenght.length == 22) {
-          if (data.contains('Vientiane') || data.contains('default')) {
-            controller!.pauseCamera();
-            Future.delayed(Duration.zero, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      GenerateQR(value: data != '' ? data : "Not Found"),
-                ),
-              ).then(onGoBack);
-            });
-          } else {
-            controller!.pauseCamera();
-            Navigator.pop(context);
-            // AlertPopup().alertMessageErrorHomePage(
-            //     'QR is incorrect', BuildContext, context);
-          }
-        } else {
-          controller!.pauseCamera();
-          Navigator.pop(context);
-          // AlertPopup().alertMessageErrorHomePage(
-          //     'QR is incorrect', BuildContext, context);
-        }
-      } else {
-        controller!.pauseCamera();
-        Navigator.pop(context);
-        // AlertPopup().alertMessageErrorHomePage(
-        //     'QR is incorrect', BuildContext, context);
-      }
-    }).onError((error, stackTrace) {
-      setState(() {
-        _data = '';
-      });
-      print('${error.toString()}');
-    });
-  }
+  // void _getPhotoByGallery() {
+  //   Stream.fromFuture(picker.pickImage(source: ImageSource.gallery))
+  //       .flatMap((file) {
+  //     setState(() {
+  //       _qrcodeFile = file!.path;
+  //     });
+  //     return Stream.fromFuture(QrCodeToolsPlugin.decodeFrom(file!.path));
+  //   }).listen((data) {
+  //     var qrTexts = data;
+  //     var newText = qrTexts.split('-');
+  //     var Lenght = qrTexts.substring(0, 22);
+  //     if (data != '') {
+  //       if (Lenght.length == 22) {
+  //         if (data.contains('Vientiane') || data.contains('default')) {
+  //           controller!.pauseCamera();
+  //           Future.delayed(Duration.zero, () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                 builder: (context) =>
+  //                     GenerateQR(value: data != '' ? data : "Not Found"),
+  //               ),
+  //             ).then(onGoBack);
+  //           });
+  //         } else {
+  //           controller!.pauseCamera();
+  //           Navigator.pop(context);
+  //           // AlertPopup().alertMessageErrorHomePage(
+  //           //     'QR is incorrect', BuildContext, context);
+  //         }
+  //       } else {
+  //         controller!.pauseCamera();
+  //         Navigator.pop(context);
+  //         // AlertPopup().alertMessageErrorHomePage(
+  //         //     'QR is incorrect', BuildContext, context);
+  //       }
+  //     } else {
+  //       controller!.pauseCamera();
+  //       Navigator.pop(context);
+  //       // AlertPopup().alertMessageErrorHomePage(
+  //       //     'QR is incorrect', BuildContext, context);
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     setState(() {
+  //       _data = '';
+  //     });
+  //     print('${error.toString()}');
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +175,7 @@ class _ScanQRState extends State<ScanQR> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         onPressed: () {
-          _getPhotoByGallery();
+          // _getPhotoByGallery();
         },
         child: const Icon(
           Icons.image,
